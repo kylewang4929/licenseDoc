@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>设备控制对接</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<p><link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/solarized_dark.min.css">
+<script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+
+<script>
+const win = window;
+win.flex = (baseFontSize, fontscale) => {
+  const _baseFontSize = baseFontSize || 100;
+  const _fontscale = fontscale || 1;
+
+  const doc = win.document;
+  const ua = navigator.userAgent;
+  const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
+  const UCversion = ua.match(/U3\/((\d+|\.){5,})/i);
+  const isUCHd = UCversion && parseInt(UCversion[1].split('.').join(''), 10) >= 80;
+  const isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);
+  let dpr = win.devicePixelRatio || 1;
+  if (!isIos && !(matches && matches[1] > 534) && !isUCHd) {
+    dpr = 1;
+  }
+  const scale = 1 / dpr;
+  document.body.style.setProperty('--scale', scale);
+
+  let metaEl = doc.querySelector('meta[name="viewport"]');
+  if (!metaEl) {
+    metaEl = doc.createElement('meta');
+    metaEl.setAttribute('name', 'viewport');
+    doc.head.appendChild(metaEl);
+  }
+  metaEl.setAttribute('content', `width=device-width,height=device-height,user-scalable=no,initial-scale=1,maximum-scale=${scale},minimum-scale=${scale},viewport-fit=cover`);
+  doc.documentElement.style.fontSize = `${_baseFontSize / 2 * dpr * _fontscale}px`;
+};
+let u = navigator.userAgent;
+if(u.indexOf('iPhone')) {
+  flex(100, 1);
+}
+</script>
+
+<style>
+ pre{
+    padding: 0px;
+    border: none;
+ }
+</style>
+<script >hljs.initHighlightingOnLoad();</script></p>
+
+<h1 id="toc_0">设备控制对接</h1>
+
+<h3 id="toc_1">设备列表推送</h3>
+
+<blockquote>
+<p>设备列表分两部分，一部分是sdk返回的设备列表，一部分是api返回的。</p>
+</blockquote>
+
+<p>这里分了两个modal，存储两份设备列表。</p>
+
+<p><img src="http://obo7gtx2x.bkt.clouddn.com/modal.png" alt=""></p>
+
+<p>两个列表会有一些交互，设备上下线的时候sdk会推送，在：
+<code>router/App.js</code>中搜索<code>registerDeviceListNotifications</code></p>
+
+<div><pre><code class="language-none">getDeviceListSuccess = (data) =&gt; {
+    const { dispatch } = this.props;
+    if (data.devices) {
+      dispatch({
+        type: &#39;deviceList/filterDeviceListAndUpdate&#39;,
+        payload: data.devices,
+      });
+      // 推送一份到api设备列表，更新在线状态
+      dispatch({
+        type: &#39;apiDeviceList/updateGizwitsDeviceList&#39;,
+        payload: data.devices,
+      });
+    }
+}</code></pre></div>
+
+<p>这里做了两件事，第一件是推送更新到deviceList modal，另一件是推送更新到apiDeviceList modal（用来更新设备的在线状态，以及相关的设备数据点，设备列表有时候会显示设备的状态，例如TDS之类的值，可以从sdk拿）。</p>
+
+<h3 id="toc_2">设备状态推送</h3>
+
+<p><code>router/App.js</code>中搜索<code>getDeviceStatusSuccess</code></p>
+
+<p>如果有些设备列表显示了设备的数据点，可以从这里再推送一条消息去api devicelist modal更新数据。</p>
+
+<h3 id="toc_3">关于apiDeviceList modal</h3>
+
+<blockquote>
+<p>sdk交互需要机智云的token，租赁后台获取token的方式是用sno换。</p>
+</blockquote>
+
+<p>这边初步的处理方式是：</p>
+
+<div><pre><code class="language-none">const data = yield call(queryUsingDevice);
+if (data.success) {
+
+// 获取设备列表
+
+const deviceList = data.data.data.records;
+payload.success &amp;&amp; payload.success(deviceList);
+
+if (deviceList.length &gt; 0) {
+    /**
+     * 判断sdk是否已经有token
+     * 如果没有，则用sno申请一个token
+     */
+  const gizwitsSdk = yield select(state =&gt; state.gizwitsSdk);
+  if (!gizwitsSdk.token) {
+    // 申请token
+    const gizwitsTokenData = yield call(getGizwitsToken, deviceList[0].sno);
+    console.log(gizwitsTokenData);
+    const { gizAppId, token, uid } = gizwitsTokenData.data.data;
+    // 把相关信息保存到本地
+    localStorage.setItem(&#39;gizwitsUid&#39;, uid);
+    localStorage.setItem(&#39;gizwitsToken&#39;, token);
+    // 更新token等相关信息到modal
+    yield put({
+      type: &#39;gizwitsSdk/update&#39;,
+      payload: {
+        appId: gizAppId,
+        token,
+        uid,
+      },
+    });
+    // 设置一个timeout，由于这个时候sdk不一定初始化完成（sdk初始化完成的回调函数不正确，这是个bug）
+    // timeout函数见apiDeviceList modal
+    yield call(timeout);
+
+    // 调用获取设备列表 传递token过去
+    yield put({
+      type: &#39;deviceList/getList&#39;,
+      payload: {
+        backgroundLoad: true,
+      },
+    });
+  }
+}</code></pre></div>
+
+<p>这里完成了获取api设备列表的同时，把token传递给sdk，sdk开始上报数据。</p>
+
+<h3 id="toc_4">设备控制的处理</h3>
+
+<blockquote>
+<p>super-app内置了设备控制的相关处理。</p>
+</blockquote>
+
+<p>在<code>container/DeviceList.js</code>里，点击item跳到下一页的操作中，需要做几件事情。</p>
+
+<div><pre><code class="language-none">  onClick = (data) =&gt; {
+    const deviceData = JSON.parse(JSON.stringify(data));
+    const { dispatch, deviceList } = this.props;
+    // 设置当前激活的mac 如果是分组，则另外处理
+    let activeData = null;
+    console.log(&#39;deviceData&#39;, deviceData);
+    console.log(&#39;deviceList.data&#39;, deviceList.data);
+    // 通过mac，查找机智云的设备对象，确认设备已经链接
+    deviceList.data.map((item) =&gt; {
+      if (item.did === deviceData.gizDid) {
+        activeData = {
+          name: deviceData.name,
+          productKey: item.productKey,
+          did: deviceData.gizDid,
+          mac: deviceData.mac,
+        };
+      }
+    });
+
+    if (activeData &amp;&amp; deviceData.onlineStatus === 1) {
+      dispatch({
+        type: &#39;templateState/initStart&#39;,
+      });
+      router.go(`#/menu/devicePage/${activeData.productKey}/${activeData.mac}/${activeData.did}`);
+      /** 标记当前激活设备 */
+      dispatch({
+        type: &#39;deviceList/updateActiveDevice&#39;,
+        payload: {
+          did: activeData.did,
+          productKey: activeData.productKey,
+          name: activeData.name,
+        },
+      });
+    } else {
+      // 提示错误
+      Toast.info(&#39;设备不在线，请检查设备是否正常运行。&#39;);
+    }
+  }</code></pre></div>
+
+<p>第一步是比对两组设备列表，获取相关的信息（name,productKey,did,mac），如果api deviceList有带这些参数的话就不用对比了。这边还需要判断设备的状态，如果设备离线，则不允许跳转过去。</p>
+
+<p>第二步是跳转到页面，并更新当前激活的设备，然后sdk就会开始推送数据到模版了。</p>
+
+
+
+
+</body>
+
+</html>
